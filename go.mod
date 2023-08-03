@@ -3,7 +3,7 @@ module github.com/khulnasoft-labs/btfhub
 go 1.19
 
 require (
-	github.com/DataDog/zstd v1.4.8
+	github.com/DataDog/zstd v1.5.5
 	github.com/cavaliergopher/cpio v1.0.1
 	github.com/cavaliergopher/rpm v1.2.0
 	github.com/dustin/go-humanize v1.0.1

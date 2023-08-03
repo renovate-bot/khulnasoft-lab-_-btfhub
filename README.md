@@ -1,0 +1,9 @@
+## What is BTF ?
+
+The Extended Berkeley Packet Filter (eBPF) is esteemed for its portability, a primary attribute of which is due to the BPF Type Format (BTF). More details about BTF can be discovered in this [comprehensive guide](https://nakryiko.com/posts/bpf-portability-and-co-re/#btf).
+
+Before the advent of [Compile Once-Run Everywhere (CO-RE)](https://nakryiko.com/posts/bpf-portability-and-co-re/), developers working with eBPF had to compile an individual eBPF object for each kernel version they intended to support. This stipulation led toolkits, such as [iovisor/bcc](https://github.com/iovisor/bcc), to depend on runtime compilations to handle different kernel versions.
+
+However, the introduction of [CO-RE](https://nakryiko.com/posts/bpf-portability-and-co-re/) facilitated a significant shift in eBPF portability, allowing a single eBPF object to be loaded into multiple differing kernels. This is achieved by the [libbpf loader](https://github.com/libbpf/libbpf), a component within the eBPF's [loader and verification architecture](https://ebpf.io/what-is-ebpf#loader--verification-architecture). The libbpf loader arranges the necessary infrastructure for an eBPF object, including eBPF map creation, code relocation, setting up eBPF probes, managing links, handling their attachments, among others.
+
+Here's the technical insight: both the eBPF object and the target kernel contain BTF information, generally embedded within their respective ELF (Executable and Linkable Format) files. The libbpf loader leverages this embedded BTF information to calculate the requisite changes such as relocations, map creations, probe attachments, and more for an eBPF object. As a result, this eBPF object can be loaded and have its programs executed across any kernel without the need for object modification, thus enhancing portability.

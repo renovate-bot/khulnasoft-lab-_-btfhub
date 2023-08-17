@@ -8,8 +8,8 @@ import (
 	"path/filepath"
 	"time"
 
-	"github.com/khulnasoft-labs/btfhub/pkg/pkg"
-	"github.com/khulnasoft-labs/btfhub/pkg/utils"
+	"github.com/khulnasoft-lab/btfhub/pkg/pkg"
+	"github.com/khulnasoft-lab/btfhub/pkg/utils"
 )
 
 type KernelExtractionJob struct {

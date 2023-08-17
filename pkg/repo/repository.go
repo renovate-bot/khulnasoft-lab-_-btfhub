@@ -3,7 +3,7 @@ package repo
 import (
 	"context"
 
-	"github.com/khulnasoft-labs/btfhub/pkg/job"
+	"github.com/khulnasoft-lab/btfhub/pkg/job"
 )
 
 type Repository interface {

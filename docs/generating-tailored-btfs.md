@@ -1,21 +1,21 @@
 ## BTFGEN: The BTF generator
 
-[BTFHUB](https://github.com/khulnasoft-labs/btfhub) was created with the aim of enabling eBPF projects like [Tracee](https://github.com/aquasecurity/tracee) to operate on kernels lacking BTF information. 
+[BTFHUB](https://github.com/khulnasoft-lab/btfhub) was created with the aim of enabling eBPF projects like [Tracee](https://github.com/aquasecurity/tracee) to operate on kernels lacking BTF information. 
 
-However, another challenge soon surfaced: the high cost associated with using complete BTF files, given the considerable size of the [BTFHub archive](https://github.com/khulnasoft-labs/btfhub-archive). To address this issue, we collaborated with [Kinvolk (acquired by Microsoft)](https://github.com/kinvolk/) and [Elastic](https://github.com/elastic) to create the [BTFgen](https://github.com/kinvolk/btfgen) tool.
+However, another challenge soon surfaced: the high cost associated with using complete BTF files, given the considerable size of the [BTFHub archive](https://github.com/khulnasoft-lab/btfhub-archive). To address this issue, we collaborated with [Kinvolk (acquired by Microsoft)](https://github.com/kinvolk/) and [Elastic](https://github.com/elastic) to create the [BTFgen](https://github.com/kinvolk/btfgen) tool.
 
 [Watch a presentation about BTFGEN here.](https://www.youtube.com/watch?v=ugzZpP4y25o)
 
-With BTFgen, users can leverage [BTFhub](https://github.com/khulnasoft-labs/btfhub) and [BTFhub-archive](https://github.com/khulnasoft-labs/btfhub-archive) to generate leaner BTF files. These bespoke BTF files are compact enough to be embedded directly within an eBPF-based application, enabling the application to support hundreds of different kernel versions by default, without the need for comprehensive BTF files. 
+With BTFgen, users can leverage [BTFhub](https://github.com/khulnasoft-lab/btfhub) and [BTFhub-archive](https://github.com/khulnasoft-lab/btfhub-archive) to generate leaner BTF files. These bespoke BTF files are compact enough to be embedded directly within an eBPF-based application, enabling the application to support hundreds of different kernel versions by default, without the need for comprehensive BTF files. 
 
 The BTFGEN was later [incorporated](https://lore.kernel.org/bpf/20220215225856.671072-1-mauricio@kinvolk.io/) in the [bpftool](https://github.com/libbpf/bpftool) as the [min_core_btf](https://man.archlinux.org/man/bpftool-gen.8.en#bpftool~4) sub-function.
 
 ## How to Generate Tailored BTF files
 
-1. Clone both [BTFhub](https://github.com/khulnasoft-labs/btfhub) and [BTFhub-Archive](https://github.com/khulnasoft-labs/btfhub-archive) repositories in the same directory:
+1. Clone both [BTFhub](https://github.com/khulnasoft-lab/btfhub) and [BTFhub-Archive](https://github.com/khulnasoft-lab/btfhub-archive) repositories in the same directory:
 
     ```
-    $ git clone git@github.com:khulnasoft-labs/btfhub.git
+    $ git clone git@github.com:khulnasoft-lab/btfhub.git
     
     Cloning into 'btfhub'...
     remote: Enumerating objects: 46, done.
@@ -25,7 +25,7 @@ The BTFGEN was later [incorporated](https://lore.kernel.org/bpf/20220215225856.6
     Receiving objects: 100% (46/46), 5.34 MiB | 5.54 MiB/s, done.
     Resolving deltas: 100% (5/5), done.
     
-    $ git clone git@github.com:khulnasoft-labs/btfhub-archive.git
+    $ git clone git@github.com:khulnasoft-lab/btfhub-archive.git
     
     Cloning into 'btfhub-archive'...
     remote: Enumerating objects: 943, done.
@@ -101,7 +101,7 @@ The BTFGEN was later [incorporated](https://lore.kernel.org/bpf/20220215225856.6
     .rw-rw-r--  5.6k rafaeldtinoco 22 Nov 22:41  custom-archive/ubuntu/20.04/x86_64/5.8.0-1041-azure.btf
     ```
 
-After the execution of the previous steps, you should possess a `custom-archive` directory brimming with customized BTF files. Each of these tailored files can now be utilized in the same manner as the comprehensive BTF files that are readily available at the [BTFhub-Archive](https://github.com/khulnasoft-labs/btfhub-archive). In other words, these compact, tailored BTF files provide the same functionality and usability as their larger, full BTF counterparts.
+After the execution of the previous steps, you should possess a `custom-archive` directory brimming with customized BTF files. Each of these tailored files can now be utilized in the same manner as the comprehensive BTF files that are readily available at the [BTFhub-Archive](https://github.com/khulnasoft-lab/btfhub-archive). In other words, these compact, tailored BTF files provide the same functionality and usability as their larger, full BTF counterparts.
 
 > **Note**: The created BTF files are specifically tailored to the given eBPF object and are incompatible with other eBPF objects. If alterations are made to your eBPF source code, it necessitates the re-generation of these files to ensure libbpf's ability to use this smaller, customized BTF file that is solely tailored to suit your needs.
 

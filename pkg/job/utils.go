@@ -3,7 +3,7 @@ package job
 import (
 	"context"
 
-	"github.com/khulnasoft-labs/btfhub/pkg/utils"
+	"github.com/khulnasoft-lab/btfhub/pkg/utils"
 )
 
 // GenerateBTF generates a BTF file from a vmlinux file

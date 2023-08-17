@@ -9,10 +9,10 @@ import (
 	"sort"
 	"strings"
 
-	"github.com/khulnasoft-labs/btfhub/pkg/job"
-	"github.com/khulnasoft-labs/btfhub/pkg/kernel"
-	"github.com/khulnasoft-labs/btfhub/pkg/pkg"
-	"github.com/khulnasoft-labs/btfhub/pkg/utils"
+	"github.com/khulnasoft-lab/btfhub/pkg/job"
+	"github.com/khulnasoft-lab/btfhub/pkg/kernel"
+	"github.com/khulnasoft-lab/btfhub/pkg/pkg"
+	"github.com/khulnasoft-lab/btfhub/pkg/utils"
 )
 
 type oracleRepo struct {

@@ -9,9 +9,9 @@ import (
 	"regexp"
 	"sort"
 
-	"github.com/khulnasoft-labs/btfhub/pkg/job"
-	"github.com/khulnasoft-labs/btfhub/pkg/pkg"
-	"github.com/khulnasoft-labs/btfhub/pkg/utils"
+	"github.com/khulnasoft-lab/btfhub/pkg/job"
+	"github.com/khulnasoft-lab/btfhub/pkg/pkg"
+	"github.com/khulnasoft-lab/btfhub/pkg/utils"
 	"golang.org/x/sync/errgroup"
 )
 

@@ -12,8 +12,8 @@ import (
 	"path/filepath"
 	"strings"
 
-	"github.com/khulnasoft-labs/btfhub/pkg/kernel"
-	"github.com/khulnasoft-labs/btfhub/pkg/utils"
+	"github.com/khulnasoft-lab/btfhub/pkg/kernel"
+	"github.com/khulnasoft-lab/btfhub/pkg/utils"
 	"pault.ag/go/debian/deb"
 )
 

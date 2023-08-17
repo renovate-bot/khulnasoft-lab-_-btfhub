@@ -8,7 +8,7 @@ import (
 	"os"
 	"time"
 
-	"github.com/khulnasoft-labs/btfhub/pkg/pkg"
+	"github.com/khulnasoft-lab/btfhub/pkg/pkg"
 )
 
 type BTFGenerationJob struct {

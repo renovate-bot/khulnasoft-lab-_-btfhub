@@ -1,4 +1,4 @@
-module github.com/khulnasoft-labs/btfhub
+module github.com/khulnasoft-lab/btfhub
 
 go 1.19
 

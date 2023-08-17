@@ -6,8 +6,8 @@ import (
 	"os"
 	"path/filepath"
 
-	"github.com/khulnasoft-labs/btfhub/pkg/kernel"
-	"github.com/khulnasoft-labs/btfhub/pkg/utils"
+	"github.com/khulnasoft-lab/btfhub/pkg/kernel"
+	"github.com/khulnasoft-lab/btfhub/pkg/utils"
 )
 
 type FedoraPackage struct {

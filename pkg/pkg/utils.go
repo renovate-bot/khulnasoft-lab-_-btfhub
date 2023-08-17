@@ -12,8 +12,8 @@ import (
 	"strconv"
 	"strings"
 
-	"github.com/khulnasoft-labs/btfhub/pkg/kernel"
-	"github.com/khulnasoft-labs/btfhub/pkg/utils"
+	"github.com/khulnasoft-lab/btfhub/pkg/kernel"
+	"github.com/khulnasoft-lab/btfhub/pkg/utils"
 )
 
 func TarballBTF(ctx context.Context, btf string, out string) error {

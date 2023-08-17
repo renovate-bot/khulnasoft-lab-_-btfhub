@@ -54,9 +54,9 @@ By choosing either of these methods, you can effectively generate BTF informatio
 
 ## How does the Linux kernel generate its own BTF information ?
 
-The central premise of [BTFhub](https://github.com/khulnasoft-labs/btfhub/) and [BTFhub-Archive](https://github.com/khulnasoft-labs/btfhub-archive/) revolves around the automation of kernel debugging package conversion to BTF information, which is vital for libbpf to operate CO-RE capable eBPF applications. This is achieved by the [btfhub](https://github.com/khulnasoft-labs/btfhub/blob/main/cmd/btfhub/main.go) application (compiled through `make`), [which downloads all existing debug kernel packages for the supported distributions and subsequently converts the embedded DWARF information into BTF format.](https://github.com/khulnasoft-labs/btfhub/blob/f37a9cdc160f3add77a24beb6512dbb4557bc728/.github/workflows/cron.yml)
+The central premise of [BTFhub](https://github.com/khulnasoft-lab/btfhub/) and [BTFhub-Archive](https://github.com/khulnasoft-lab/btfhub-archive/) revolves around the automation of kernel debugging package conversion to BTF information, which is vital for libbpf to operate CO-RE capable eBPF applications. This is achieved by the [btfhub](https://github.com/khulnasoft-lab/btfhub/blob/main/cmd/btfhub/main.go) application (compiled through `make`), [which downloads all existing debug kernel packages for the supported distributions and subsequently converts the embedded DWARF information into BTF format.](https://github.com/khulnasoft-lab/btfhub/blob/f37a9cdc160f3add77a24beb6512dbb4557bc728/.github/workflows/cron.yml)
 
-BTFhub operates the `btfhub` application in a manner similar to a cron job, executing it daily. The generated BTF files are then uploaded into the [BTFhub-Archive repository](https://github.com/khulnasoft-labs/btfhub-archive/), where they can be consumed by your project.
+BTFhub operates the `btfhub` application in a manner similar to a cron job, executing it daily. The generated BTF files are then uploaded into the [BTFhub-Archive repository](https://github.com/khulnasoft-lab/btfhub-archive/), where they can be consumed by your project.
 
 1. For hands-on experience, you can add a .BTF ELF section to the non-stripped vmlinuz (uncompressed) kernel file by executing:
 

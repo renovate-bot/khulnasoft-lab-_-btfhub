@@ -72,14 +72,14 @@ jobs:
       - name: Check out BTFHub
         uses: actions/checkout@v3
         with:
-          repository: khulnasoft-labs/btfhub
+          repository: khulnasoft-lab/btfhub
           path: ./btfhub
           token: ${{ secrets.ACCESS_TOKEN }}
       # Authenticate
       - name: Checkout BTFHub Archive
         uses: actions/checkout@v3
         with:
-          repository: khulnasoft-labs/btfhub-archive
+          repository: khulnasoft-lab/btfhub-archive
           path: ./btfhub-archive
           token: ${{ secrets.ACCESS_TOKEN }}
       #

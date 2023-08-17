@@ -11,8 +11,8 @@ import (
 	"path/filepath"
 	"runtime"
 
-	"github.com/khulnasoft-labs/btfhub/pkg/job"
-	"github.com/khulnasoft-labs/btfhub/pkg/repo"
+	"github.com/khulnasoft-lab/btfhub/pkg/job"
+	"github.com/khulnasoft-lab/btfhub/pkg/repo"
 	"golang.org/x/sync/errgroup"
 )
 

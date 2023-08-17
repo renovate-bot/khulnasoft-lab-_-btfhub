@@ -315,7 +315,7 @@ Linux bionic 5.4.0-87-generic #98~18.04.1-Ubuntu SMP Wed Sep 22 10:45:04 UTC 202
 
 # Copy compressed BTF file and uncompress it:
 
-$ cp /sources/ebpf/aquasec-btfhub/ubuntu/bionic/x86_64/$(uname -r).btf.tar.xz .
+$ cp /sources/ebpf/khulnasoft-btfhub/ubuntu/bionic/x86_64/$(uname -r).btf.tar.xz .
 $ tar xvfJ ./$(uname -r).btf.tar.xz
 5.4.0-87-generic.btf
 
@@ -336,7 +336,7 @@ A perceptive reader might have already made the question: Okay, isn't that too e
 And, yes, that was the biggest problem and one of the main reasons why **btfgen**, being detailed explained in this document, was created.
 
 ```
-[user@aquasec-btfhub]$ ls -1 ./ubuntu/bionic/x86_64 | head -10
+[user@khulnasoft-btfhub]$ ls -1 ./ubuntu/bionic/x86_64 | head -10
 4.15.0-20-generic.btf.tar.xz
 4.15.0-22-generic.btf.tar.xz
 4.15.0-23-generic.btf.tar.xz
@@ -348,7 +348,7 @@ And, yes, that was the biggest problem and one of the main reasons why **btfgen*
 4.15.0-34-generic.btf.tar.xz
 4.15.0-36-generic.btf.tar.xz
 
-[user@aquasec-btfhub]$ du -sh .
+[user@khulnasoft-btfhub]$ du -sh .
 1.5G	.
 ```
 
@@ -657,7 +657,7 @@ All we need is to walk the relocation, type by type, member/field by member/fiel
 
 So, let's do this, let's walk all the relocations. To each relocation, let's walk the BTF types being represented by the relocation. And let's understand **BTF generator** internals.
 
-By starting the **BTF generator** tool with debug messages, having an external BTF file for kernel 5.4.0-87 (Ubuntu Bionic), to a complex eBPF object ([Tracee](https://github.com/aquasecurity/tracee/blob/main/tracee-ebpf/tracee/tracee.bpf.c)), we will see a list of all the relocations calculated from the given eBPF object for this object to run in a 5.4.0-87 kernel:
+By starting the **BTF generator** tool with debug messages, having an external BTF file for kernel 5.4.0-87 (Ubuntu Bionic), to a complex eBPF object ([Tracker](https://github.com/khulnasoft/tracker/blob/main/tracker-ebpf/tracker/tracker.bpf.c)), we will see a list of all the relocations calculated from the given eBPF object for this object to run in a 5.4.0-87 kernel:
 
 ```
 RELOCATION: [26219] struct bpf_raw_tracepoint_args.args[1] (0:0:1 @ offset 8)
@@ -970,7 +970,7 @@ The reader can opt to use BTFHUB in different ways:
 
 1. To download an ENTIRE BTF file for a specific kernel version and use it as an external BTF file when loading your app using libbpf. Examples:
 
-	- [tracee-ebpf](https://github.com/aquasecurity/tracee/blob/main/tracee-ebpf/main.go#L155)
+	- [tracker-ebpf](https://github.com/khulnasoft/tracker/blob/main/tracker-ebpf/main.go#L155)
 	- [inspektor-gadget](https://github.com/kinvolk/inspektor-gadget/commit/f7a807e86ea90d4df1bfea013139381c07aab6d2)
 
 	To each different kernel you will have to download the correspondent BTF file available in BTFHUB. This is the old, problematic (big), way of doing CO-RE for kernels that don't support BTF.
@@ -980,12 +980,12 @@ or
 2. To clone **BTFHUB** and use **btfgen** to generate **ALL BTF files** for the kernels *you would like to support for your app*. Example:
 
 	```
-	[user@host:~/.../aquasec-btfhub/tools][main]$ ./btfgen.sh ~/aquasec-tracee/tracee-ebpf/dist/tracee.bpf.core.o
+	[user@host:~/.../khulnasoft-btfhub/tools][main]$ ./btfgen.sh ~/khulnasoft-tracker/tracker-ebpf/dist/tracker.bpf.core.o
 	```
 
 If you visit the [tools](https://github.com/khulnasoft-lab/btfhub/tree/main/tools) directory within [BTFHUB](https://github.com/khulnasoft-lab/btfhub) you will see instructions on how to use a non-upstreamed (and statically compiled version) of **btfgen** (the **BTF generator**).
 
-[btfgen.sh](https://github.com/khulnasoft-lab/btfhub/blob/main/tools/btfgen.sh) script will generate **multiple BTF files and symlinks** at `tools/output/{centos,fedora,ubuntu}/` containing ONLY the types being used by the given eBPF object (`tracee.bpf.core.o` in this example), with the relocations for each specific kernel version already recalculated.
+[btfgen.sh](https://github.com/khulnasoft-lab/btfhub/blob/main/tools/btfgen.sh) script will generate **multiple BTF files and symlinks** at `tools/output/{centos,fedora,ubuntu}/` containing ONLY the types being used by the given eBPF object (`tracker.bpf.core.o` in this example), with the relocations for each specific kernel version already recalculated.
 
 Then you can execute your application by loading the correspondent - to your running kernel - partial generated BTF file:
 
@@ -1005,7 +1005,7 @@ Codename:	bionic
 $ bpftool btf dump file ./generated/5.4.0-87-generic.btf format raw | grep "^\[" | wc -l
 122
 
-[user@host:~/.../aquasec-tracee/tracee-ebpf]$ sudo TRACEE_BTF_FILE=~/aquasec-btfhub/tools/output/ubuntu/18.04/x86_64/5.4.0-87-generic.btf ./dist/tracee-ebpf --debug --trace event=execve,execveat,uname
+[user@host:~/.../khulnasoft-tracker/tracker-ebpf]$ sudo TRACKER_BTF_FILE=~/khulnasoft-btfhub/tools/output/ubuntu/18.04/x86_64/5.4.0-87-generic.btf ./dist/tracker-ebpf --debug --trace event=execve,execveat,uname
 
 OSInfo: VERSION: "18.04.6 LTS (Bionic Beaver)"
 OSInfo: ID: ubuntu
@@ -1016,7 +1016,7 @@ OSInfo: VERSION_CODENAME: bionic
 OSInfo: KERNEL_RELEASE: 5.4.0-87-generic
 BTF: bpfenv = false, btfenv = true, vmlinux = false
 BPF: using embedded BPF object
-BTF: using BTF file from environment: ~/aquasec-btfhub/tools/output/ubuntu/18.04/x86_64/5.4.0-87-generic.btf
+BTF: using BTF file from environment: ~/khulnasoft-btfhub/tools/output/ubuntu/18.04/x86_64/5.4.0-87-generic.btf
 unpacked CO:RE bpf object file into memory
 
 TIME             UID    COMM             PID     TID     RET              EVENT                ARGS

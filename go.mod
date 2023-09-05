@@ -8,7 +8,7 @@ require (
 	github.com/cavaliergopher/rpm v1.2.0
 	github.com/dustin/go-humanize v1.0.1
 	github.com/therootcompany/xz v1.0.1
-	golang.org/x/exp v0.0.0-20230811145659-89c5cff77bcb
+	golang.org/x/exp v0.0.0-20230905200255-921286631fa9
 	golang.org/x/sync v0.3.0
 	pault.ag/go/debian v0.15.0
 )

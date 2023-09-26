@@ -26,7 +26,7 @@ Please note that BTFhub's use is not universally necessary. If your intent is to
 
 ## How to Use
 
-[Tracee](https://github.com/khulnasoft-lab/tracee/), a runtime security and tracing tool for Linux, serves as a leading example of effective utilization of BTFhub. Tracee incorporates a [script](https://github.com/khulnasoft-lab/tracee/blob/6076457ebb95432da3104f358cb9a29a1d8416c4/3rdparty/btfhub.sh#L107-L108) that downloads the contents of both the [BTFhub](https://github.com/khulnasoft-lab/btfhub) and [BTFhub Archive](https://github.com/khulnasoft-lab/btfhub-archive) repositories. 
+[Tracee](https://github.com/khulnasoft-lab/tracker/), a runtime security and tracing tool for Linux, serves as a leading example of effective utilization of BTFhub. Tracee incorporates a [script](https://github.com/khulnasoft-lab/tracker/blob/6076457ebb95432da3104f358cb9a29a1d8416c4/3rdparty/btfhub.sh#L107-L108) that downloads the contents of both the [BTFhub](https://github.com/khulnasoft-lab/btfhub) and [BTFhub Archive](https://github.com/khulnasoft-lab/btfhub-archive) repositories. 
 
 This script then uses the BTFhub scripts to [generate tailored BTF files](docs/generating-tailored-btfs.md) that are exceptionally small in size. The result is a streamlined integration process and an efficient method for handling BTF files, demonstrating the power of BTFhub and its scripts when used effectively.
 

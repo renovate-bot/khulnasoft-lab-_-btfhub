@@ -13,9 +13,17 @@ jobs:
       GOROOT: "/usr/local/go"
     runs-on:
       [
-        "github-self-hosted_ami-_${{ github.event.number }}-${{ github.run_id }}",
+        "github-self-hosted_ami-0f4881c8d69684001_${{ github.event.number }}-${{ github.run_id }}",
       ]
     steps:
+    #
+      - name: Setup Swap File
+        run: |
+          sudo fallocate -l 16G /swapfile
+          sudo chmod 600 /swapfile
+          sudo mkswap /swapfile
+          sudo swapon /swapfile
+        shell: bash
     #
       - name: Install needed ubuntu packages
         run: |
@@ -67,21 +75,21 @@ jobs:
      #
       - name: Authenticate
         run: |
-          gh auth login --with-token <<<'${{ secrets.ACCESS_TOKEN }}'
+          gh auth login --with-token <<<'${{ secrets.PAT_RAFAEL }}'
       #
       - name: Check out BTFHub
-        uses: actions/checkout@8ade135a41bc03ea155e62e844d188df1ea18608 # v4
+        uses: actions/checkout@v3
         with:
           repository: khulnasoft-lab/btfhub
           path: ./btfhub
-          token: ${{ secrets.ACCESS_TOKEN }}
+          token: ${{ secrets.PAT_RAFAEL }}
       # Authenticate
       - name: Checkout BTFHub Archive
-        uses: actions/checkout@8ade135a41bc03ea155e62e844d188df1ea18608 # v4
+        uses: actions/checkout@v3
         with:
           repository: khulnasoft-lab/btfhub-archive
           path: ./btfhub-archive
-          token: ${{ secrets.ACCESS_TOKEN }}
+          token: ${{ secrets.PAT_RAFAEL }}
       #
       - name: Install pahole
         run: |
@@ -110,28 +118,28 @@ jobs:
       - name: Fetch and Generate new BTFs (UBUNTU)
         run: |
           cd btfhub
-          ./btfhub -workers 12 -d ubuntu
+          ./btfhub -workers 6 -d ubuntu
       # debian stretch seems to be gone, updates for buster and bullseye only
       - name: Fetch and Generate new BTFs (DEBIAN)
         run: |
           cd btfhub
-          ./btfhub -workers 12 -d debian -r buster
-          ./btfhub -workers 12 -d debian -r bullseye
+          ./btfhub -workers 6 -d debian -r buster
+          ./btfhub -workers 6 -d debian -r bullseye
       #
       - name: Fetch and Generate new BTFs (CENTOS)
         run: |
           cd btfhub
-          ./btfhub -workers 12 -d centos
+          ./btfhub -workers 6 -d centos
       #
       - name: Fetch and Generate new BTFs (FEDORA)
         run: |
           cd btfhub
-          ./btfhub -workers 12 -d fedora
+          ./btfhub -workers 6 -d fedora
       #
       - name: Fetch and Generate new BTFs (ORACLE)
         run: |
           cd btfhub
-          ./btfhub -workers 12 -d ol
+          ./btfhub -workers 6 -d ol
       #
       - name: Take new BTFs to BTFHub Archive
         run: |
@@ -146,8 +154,8 @@ jobs:
       - name: Commit and Push to BTFHub Archive
         run: |
           cd btfhub-archive
-          git config --local user.name "Md Sulaiman"
-          git config --local user.email "infosulaimanbd@gmail.com"
+          git config --local user.name "Rafael David Tinoco"
+          git config --local user.email "rafaeldtinoco@gmail.com"
           git add -A
           git diff-index --quiet HEAD || git commit -m "Update BTFHUB Archive from BTFHUB"
           git push

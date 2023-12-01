@@ -111,27 +111,33 @@ jobs:
       #
       - name: Fetch and Generate new BTFs (UBUNTU)
         run: |
+          cd btfhub 
           ./btfhub -workers 6 -d ubuntu
       # debian stretch seems to be gone, updates for buster and bullseye only
       - name: Fetch and Generate new BTFs (DEBIAN)
         run: |
+          cd btfhub 
           ./btfhub -workers 6 -d debian -r buster
           ./btfhub -workers 6 -d debian -r bullseye
       #
       - name: Fetch and Generate new BTFs (CENTOS)
         run: |
+          cd btfhub
           ./btfhub -workers 6 -d centos
       #
       - name: Fetch and Generate new BTFs (FEDORA)
         run: |
+          cd btfhub 
           ./btfhub -workers 6 -d fedora
       #
       - name: Fetch and Generate new BTFs (ORACLE)
         run: |
+          cd btfhub 
           ./btfhub -workers 6 -d ol
       #
       - name: Take new BTFs to BTFHub Archive
         run: |
+          cd btfhub 
           make take
       #
       - name: Check Status

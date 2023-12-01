@@ -104,14 +104,9 @@ jobs:
       - name: Bring current BTFHub Archive
         run: |
           cd btfhub 
-          make bring
+          make bring & make
         shell: bash
-      #
-      - name: Compile BTFHub Tool
-        run: |
-          cd btfhub 
-          make
-        shell: bash
+
       #
       - name: Fetch and Generate new BTFs (UBUNTU)
         run: |

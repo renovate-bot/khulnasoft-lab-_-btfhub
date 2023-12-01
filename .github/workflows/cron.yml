@@ -86,16 +86,19 @@ jobs:
       #
       - name: Install pahole
         run: |
+          cd btfhub
           ./3rdparty/pahole.sh
         shell: bash
       #
       - name: Install bpftool
         run: |
+          cd btfhub
           ./3rdparty/bpftool.sh
         shell: bash
       #
       - name: Bring current BTFHub Archive
         run: |
+          cd btfhub
           make bring
         shell: bash
 

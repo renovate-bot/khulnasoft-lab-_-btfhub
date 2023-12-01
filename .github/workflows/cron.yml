@@ -13,7 +13,7 @@ jobs:
       GOROOT: "/usr/local/go"
     runs-on:
       [
-        "github-self-hosted_${{ github.event.number }}-${{ github.run_id }}",
+        "github-self-hosted-${{ github.event.number }}-${{ github.run_id }}",
       ]
     steps:
     #

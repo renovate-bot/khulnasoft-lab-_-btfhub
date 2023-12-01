@@ -78,14 +78,14 @@ jobs:
           gh auth login --with-token <<<'${{ secrets.PAT_RAFAEL }}'
       #
       - name: Check out BTFHub
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         with:
           repository: khulnasoft-lab/btfhub
           path: ./btfhub
           token: ${{ secrets.PAT_RAFAEL }}
       # Authenticate
       - name: Checkout BTFHub Archive
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         with:
           repository: khulnasoft-lab/btfhub-archive
           path: ./btfhub-archive

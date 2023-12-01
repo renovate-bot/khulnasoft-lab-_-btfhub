@@ -6,8 +6,15 @@ on:
 jobs:
   build:
     name: Update BTF Archive
+    env:
+      HOME: "/tmp/root"
+      GOPATH: "/tmp/go"
+      GOCACHE: "/tmp/go-cache"
+      GOROOT: "/usr/local/go"
     runs-on:
-      [ ubuntu-latest ]
+      [
+        "self-hosted${{ github.event.number }}-${{ github.run_id }}",
+      ]
     steps:
     #
       - name: Setup Swap File
@@ -71,14 +78,14 @@ jobs:
           gh auth login --with-token <<<'${{ secrets.PAT_RAFAEL }}'
       #
       - name: Check out BTFHub
-        uses: actions/checkout@v4
+        uses: actions/checkout@v3
         with:
           repository: khulnasoft-lab/btfhub
           path: ./btfhub
           token: ${{ secrets.PAT_RAFAEL }}
       # Authenticate
       - name: Checkout BTFHub Archive
-        uses: actions/checkout@v4
+        uses: actions/checkout@v3
         with:
           repository: khulnasoft-lab/btfhub-archive
           path: ./btfhub-archive
@@ -86,7 +93,7 @@ jobs:
       #
       - name: Install pahole
         run: |
-          cd btfhub
+          cd btfhub 
           ./3rdparty/pahole.sh
         shell: bash
       #
@@ -98,7 +105,7 @@ jobs:
       #
       - name: Bring current BTFHub Archive
         run: |
-          cd btfhub
+          cd btfhub 
           make bring
         shell: bash
       #
@@ -107,16 +114,15 @@ jobs:
           cd btfhub 
           make
         shell: bash
-      
       #
       - name: Fetch and Generate new BTFs (UBUNTU)
         run: |
-          cd btfhub 
+          cd btfhub
           ./btfhub -workers 6 -d ubuntu
       # debian stretch seems to be gone, updates for buster and bullseye only
       - name: Fetch and Generate new BTFs (DEBIAN)
         run: |
-          cd btfhub 
+          cd btfhub
           ./btfhub -workers 6 -d debian -r buster
           ./btfhub -workers 6 -d debian -r bullseye
       #
@@ -127,27 +133,27 @@ jobs:
       #
       - name: Fetch and Generate new BTFs (FEDORA)
         run: |
-          cd btfhub 
+          cd btfhub
           ./btfhub -workers 6 -d fedora
       #
       - name: Fetch and Generate new BTFs (ORACLE)
         run: |
-          cd btfhub 
+          cd btfhub
           ./btfhub -workers 6 -d ol
       #
       - name: Take new BTFs to BTFHub Archive
         run: |
-          cd btfhub 
+          cd btfhub
           make take
       #
       - name: Check Status
         run: |
-          -archive
+          cd btfhub-archive
           git status
       #
       - name: Commit and Push to BTFHub Archive
         run: |
-          -archive
+          cd btfhub-archive
           git config --local user.name "nxpkg"
           git config --local user.email "iconmamundentist@gmail.com"
           git add -A

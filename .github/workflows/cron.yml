@@ -12,9 +12,7 @@ jobs:
       GOCACHE: "/tmp/go-cache"
       GOROOT: "/usr/local/go"
     runs-on:
-      [
-        "${{ github.event.number }}-${{ github.run_id }}",
-      ]
+      [ubuntu-latest]
     steps:
     #
       - name: Setup Swap File

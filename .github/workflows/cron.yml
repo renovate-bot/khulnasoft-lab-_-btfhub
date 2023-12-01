@@ -104,7 +104,7 @@ jobs:
       - name: Bring current BTFHub Archive
         run: |
           cd btfhub 
-          make bring & make
+          make bring
         shell: bash
 
       #

@@ -114,7 +114,6 @@ jobs:
         run: |
           cd btfhub 
           make
-        shell: bash
       #
       - name: Fetch and Generate new BTFs (UBUNTU)
         run: |

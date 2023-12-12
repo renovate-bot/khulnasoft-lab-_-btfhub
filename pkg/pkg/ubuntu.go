@@ -12,9 +12,10 @@ import (
 	"path/filepath"
 	"strings"
 
+	"pault.ag/go/debian/deb"
+
 	"github.com/khulnasoft-lab/btfhub/pkg/kernel"
 	"github.com/khulnasoft-lab/btfhub/pkg/utils"
-	"pault.ag/go/debian/deb"
 )
 
 // UbuntuPackage represents a package in Ubuntu
@@ -34,6 +35,10 @@ func (pkg *UbuntuPackage) isValid() bool {
 }
 
 func (pkg *UbuntuPackage) Filename() string {
+	return pkg.NameOfFile
+}
+
+func (pkg *UbuntuPackage) BTFFilename() string {
 	return pkg.NameOfFile
 }
 
@@ -116,6 +121,7 @@ func (pkg *UbuntuPackage) ExtractKernel(ctx context.Context, pkgPath string, vml
 				return fmt.Errorf("create vmlinux file: %s", err)
 			}
 			counter := &utils.ProgressCounter{
+				Ctx:  ctx,
 				Op:   "Extract",
 				Name: hdr.Name,
 				Size: uint64(hdr.Size),

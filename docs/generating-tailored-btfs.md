@@ -1,6 +1,6 @@
 ## BTFGEN: The BTF generator
 
-[BTFHUB](https://github.com/khulnasoft-lab/btfhub) was created with the aim of enabling eBPF projects like [Tracee](https://github.com/khulnasoft-lab/tracker) to operate on kernels lacking BTF information. 
+[BTFHUB](https://github.com/khulnasoft-lab/btfhub) was created with the aim of enabling eBPF projects like [Tracee](https://github.com/khulnasoft-lab/tracee) to operate on kernels lacking BTF information. 
 
 However, another challenge soon surfaced: the high cost associated with using complete BTF files, given the considerable size of the [BTFHub archive](https://github.com/khulnasoft-lab/btfhub-archive). To address this issue, we collaborated with [Kinvolk (acquired by Microsoft)](https://github.com/kinvolk/) and [Elastic](https://github.com/elastic) to create the [BTFgen](https://github.com/kinvolk/btfgen) tool.
 
@@ -61,21 +61,21 @@ The BTFGEN was later [incorporated](https://lore.kernel.org/bpf/20220215225856.6
 3. Generate the tailored, to your eBPF object(s), BTF files:
 
     ```
-    $ ./tools/btfgen.sh -a x86_64 -o $HOME/tracker.bpf.core.o
+    $ ./tools/btfgen.sh -a x86_64 -o $HOME/tracee.bpf.core.o
     ...
-    OBJ : /home/rafaeldtinoco/tracker.bpf.core.o
+    OBJ : /home/rafaeldtinoco/tracee.bpf.core.o
     DBTF: ./custom-archive/ubuntu/20.04/x86_64/5.4.0-1047-azure.btf
     SBTF: ./5.4.0-73-generic.btf
-    OBJ : /home/rafaeldtinoco/tracker.bpf.core.o
+    OBJ : /home/rafaeldtinoco/tracee.bpf.core.o
     DBTF: ./custom-archive/ubuntu/20.04/x86_64/5.4.0-73-generic.btf
     SBTF: ./5.11.0-1014-aws.btf
-    OBJ : /home/rafaeldtinoco/tracker.bpf.core.o
+    OBJ : /home/rafaeldtinoco/tracee.bpf.core.o
     DBTF: ./custom-archive/ubuntu/20.04/x86_64/5.11.0-1014-aws.btf
     SBTF: ./5.8.0-1040-azure.btf
-    OBJ : /home/rafaeldtinoco/tracker.bpf.core.o
+    OBJ : /home/rafaeldtinoco/tracee.bpf.core.o
     DBTF: ./custom-archive/ubuntu/20.04/x86_64/5.8.0-1040-azure.btf
     SBTF: ./5.4.0-1025-aws.btf
-    OBJ : /home/rafaeldtinoco/tracker.bpf.core.o
+    OBJ : /home/rafaeldtinoco/tracee.bpf.core.o
     DBTF: ./custom-archive/ubuntu/20.04/x86_64/5.4.0-1025-aws.btf
     ```
 

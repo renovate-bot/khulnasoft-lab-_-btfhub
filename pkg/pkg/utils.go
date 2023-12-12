@@ -18,7 +18,17 @@ import (
 
 func TarballBTF(ctx context.Context, btf string, out string) error {
 	// Use external tool for performance reasons
-	return utils.RunCMD(ctx, filepath.Dir(btf), "tar", "cvfJ", out, filepath.Base(btf))
+	return utils.RunCMD(ctx, filepath.Dir(btf), "tar",
+		"-cvJ",
+		"--sort=name",
+		"--owner=root:0",
+		"--group=root:0",
+		"--mode=a=r",
+		"--mtime=@0",
+		"-f",
+		out,
+		filepath.Base(btf),
+	)
 }
 
 //
@@ -31,9 +41,8 @@ func yumDownload(ctx context.Context, pkg string, destdir string) error {
 
 	destDirParam := fmt.Sprintf("--downloaddir=%s", destdir)
 
-	cmd := exec.CommandContext(ctx,
-		"sudo", "yum", "install", "-y", "--downloadonly", destDirParam, pkg,
-	)
+	binary, args := utils.SudoCMD("yum", "install", "-y", "--downloadonly", destDirParam, pkg)
+	cmd := exec.CommandContext(ctx, binary, args...)
 
 	cmd.Stdout = os.Stdout
 	cmd.Stderr = stderr

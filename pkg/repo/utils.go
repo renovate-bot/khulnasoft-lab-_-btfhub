@@ -12,11 +12,12 @@ import (
 	"path/filepath"
 	"strings"
 
+	"golang.org/x/exp/maps"
+
 	"github.com/khulnasoft-lab/btfhub/pkg/job"
 	"github.com/khulnasoft-lab/btfhub/pkg/kernel"
 	"github.com/khulnasoft-lab/btfhub/pkg/pkg"
 	"github.com/khulnasoft-lab/btfhub/pkg/utils"
-	"golang.org/x/exp/maps"
 )
 
 func parseYumPackages(rdr io.Reader, minVersion kernel.Version) ([]pkg.Package, error) {
@@ -62,7 +63,8 @@ func parseYumPackages(rdr io.Reader, minVersion kernel.Version) ([]pkg.Package, 
 func yumSearch(ctx context.Context, pkg string) (*bytes.Buffer, error) {
 	stdout := &bytes.Buffer{}
 	stderr := &bytes.Buffer{}
-	cmd := exec.CommandContext(ctx, "sudo", "yum", "search", "--showduplicates", pkg)
+	binary, args := utils.SudoCMD("yum", "search", "--showduplicates", pkg)
+	cmd := exec.CommandContext(ctx, binary, args...)
 	cmd.Stdout = stdout
 	cmd.Stderr = stderr
 	if err := cmd.Run(); err != nil {
@@ -81,9 +83,9 @@ func processPackage(
 	jobChan chan<- job.Job,
 ) error {
 
-	btfName := fmt.Sprintf("%s.btf", p.Filename())
+	btfName := fmt.Sprintf("%s.btf", p.BTFFilename())
 	btfPath := filepath.Join(workDir, btfName)
-	btfTarName := fmt.Sprintf("%s.btf.tar.xz", p.Filename())
+	btfTarName := fmt.Sprintf("%s.btf.tar.xz", p.BTFFilename())
 	btfTarPath := filepath.Join(workDir, btfTarName)
 
 	if pkg.PackageHasBTF(p, workDir) {

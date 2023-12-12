@@ -34,3 +34,11 @@ func RunCMD(ctx context.Context, cwd string, binary string, args ...string) erro
 
 	return nil
 }
+
+func SudoCMD(binary string, args ...string) (string, []string) {
+	_, err := exec.LookPath("sudo")
+	if err == nil {
+		return "sudo", append([]string{binary}, args...)
+	}
+	return binary, args
+}

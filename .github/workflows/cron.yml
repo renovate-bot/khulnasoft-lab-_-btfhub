@@ -40,25 +40,24 @@ jobs:
           export DEBIAN_FRONTEND=noninteractive
           sudo update-alternatives --remove-all cc || true
           # (rest of the LLVM alternatives configuration)
-
+      
       - name: Authenticate
         run: |
-          set -x
-          gh auth login --with-token "${{ secrets.ORG_REPO_TOKEN }}"
-        env:
-          GITHUB_TOKEN: ${{ secrets.ORG_REPO_TOKEN }}
-      
+          gh auth login --with-token <<<'${{ secrets.ORG_REPO_TOKEN }}'
+      #
       - name: Check out BTFHub
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
         with:
           repository: khulnasoft-lab/btfhub
           path: ./btfhub
-
+          token: ${{ secrets.ORG_REPO_TOKEN }}
+      # Authenticate
       - name: Checkout BTFHub Archive
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
         with:
           repository: khulnasoft-lab/btfhub-archive
           path: ./btfhub-archive
+          token: ${{ secrets.ORG_REPO_TOKEN }}
 
       - name: Install pahole
         run: |

@@ -11,6 +11,12 @@ jobs:
 
     runs-on: ubuntu-latest
 
+    env:
+      HOME: "/tmp/root"
+      GOPATH: "/tmp/go"
+      GOCACHE: "/tmp/go-cache"
+      GOROOT: "/usr/local/go"
+
     steps:
       - name: Setup Swap File
         run: |
@@ -24,11 +30,10 @@ jobs:
           export DEBIAN_FRONTEND=noninteractive
           sudo dpkg --purge unattended-upgrades
           sudo apt-get update
-          sudo apt-get install -y \
-            bsdutils build-essential pkgconf \
-            zlib1g-dev libelf-dev \
-            software-properties-common \
-            devscripts ubuntu-dev-tools
+          sudo apt-get install -y bsdutils build-essential pkgconf
+          sudo apt-get install -y zlib1g-dev libelf-dev
+          sudo apt-get install -y software-properties-common
+          sudo apt-get install -y devscripts ubuntu-dev-tools
 
       - name: Update alternatives for LLVM
         run: |
@@ -37,21 +42,19 @@ jobs:
           # (rest of the LLVM alternatives configuration)
 
       - name: Authenticate
-        run: gh auth login --with-token <<<'${{ secrets.PAT_RAFAEL }}'
+        run: gh auth login --with-token "${{ secrets.PAT_RAFAEL }}"
 
-      - name: Checkout BTFHub
-        uses: actions/checkout@v4
+      - name: Check out BTFHub
+        uses: actions/checkout@v2
         with:
-          repository: khulnasoft-lab/btfhub
+          repository: aquasecurity/btfhub
           path: ./btfhub
-          token: ${{ secrets.PAT_RAFAEL }}
 
       - name: Checkout BTFHub Archive
-        uses: actions/checkout@v4
+        uses: actions/checkout@v2
         with:
-          repository: khulnasoft-lab/btfhub-archive
+          repository: aquasecurity/btfhub-archive
           path: ./btfhub-archive
-          token: ${{ secrets.PAT_RAFAEL }}
 
       - name: Install pahole
         run: |

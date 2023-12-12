@@ -47,13 +47,13 @@ jobs:
       - name: Check out BTFHub
         uses: actions/checkout@v2
         with:
-          repository: aquasecurity/btfhub
+          repository: khulnasoft-lab/btfhub
           path: ./btfhub
 
       - name: Checkout BTFHub Archive
         uses: actions/checkout@v2
         with:
-          repository: aquasecurity/btfhub-archive
+          repository: khulnasoft-lab/btfhub-archive
           path: ./btfhub-archive
 
       - name: Install pahole

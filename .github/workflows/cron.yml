@@ -42,7 +42,7 @@ jobs:
           # (rest of the LLVM alternatives configuration)
 
       - name: Authenticate
-        run: gh auth login --with-token "${{ secrets.PAT_RAFAEL }}"
+        run: gh auth login --with-token "${{ secrets.ORG_REPO_TOKEN }}"
 
       - name: Check out BTFHub
         uses: actions/checkout@v2

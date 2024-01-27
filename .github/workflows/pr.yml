@@ -31,7 +31,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Code
-        uses: actions/checkout@v4
+        uses: actions/checkoutv4@8ade135a41bc03ea155e62e844d188df1ea18608
         with:
           submodules: true
       - name: Install Dependencies
@@ -61,7 +61,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Code
-        uses: actions/checkout@v4
+        uses: actions/checkoutv4@8ade135a41bc03ea155e62e844d188df1ea18608
         with:
           submodules: true
       - name: Install Dependencies

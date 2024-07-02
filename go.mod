@@ -7,7 +7,7 @@ require (
 	github.com/cavaliergopher/cpio v1.0.1
 	github.com/cavaliergopher/rpm v1.2.0
 	github.com/therootcompany/xz v1.0.1
-	golang.org/x/exp v0.0.0-20240604190554-fc45aab8b7f8
+	golang.org/x/exp v0.0.0-20240613232115-7f521ea00fb8
 	golang.org/x/sync v0.7.0
 	pault.ag/go/debian v0.16.0
 )
